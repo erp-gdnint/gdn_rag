@@ -1,0 +1,51 @@
+{
+	"enabled": true,
+	"surfaces": { "desk": true, "lms": true },
+	"allowed_roles": [],
+	"shortcut": { "ctrl": true, "alt": true, "shift": false, "code": "KeyI" },
+	"show_launcher": true,
+	"retrieval": {
+		"top_k": 6,
+		"fulltext_candidates": 30,
+		"all_words_candidates": 10,
+		"short_term_candidates": 20,
+		"short_term_scan_max_rows": 50000,
+		"max_context_chars": 12000,
+		"rrf_k": 60,
+		"coverage_weight": 0.6,
+		"title_boost": 0.5
+	},
+	"search": {
+		"aliases": {
+			"c++": "cplusplus",
+			"c#": "csharp",
+			".net": "dotnet",
+			"node.js": "nodejs",
+			"ai": "artificialintelligence",
+			"ml": "machinelearning"
+		},
+		"alias_phrases": {
+			"artificialintelligence": "artificial intelligence",
+			"machinelearning": "machine learning",
+			"dotnet": "dot net"
+		},
+		"stopwords": [
+			"a", "an", "the", "is", "are", "was", "were", "be", "to", "of", "in", "on", "at", "for",
+			"and", "or", "it", "this", "that", "what", "how", "why", "when", "where", "who", "which",
+			"do", "does", "did", "can", "i", "me", "my", "you", "your", "please", "explain", "tell",
+			"about"
+		]
+	},
+	"chunking": { "target_chars": 1800, "overlap_chars": 200, "min_chars": 80 },
+	"chat": {
+		"history_turns": 4,
+		"max_question_chars": 2000,
+		"answer_ttl_seconds": 600,
+		"job_timeout": 180,
+		"queue": "default",
+		"hourly_limit_per_user": 0,
+		"not_found_message": "I couldn't find this in the course material."
+	},
+	"indexing": { "realtime": true, "scheduled": true, "max_docs_per_run": 500 },
+	"logging": { "log_questions": false }
+}

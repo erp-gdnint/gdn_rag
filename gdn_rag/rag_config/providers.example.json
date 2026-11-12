@@ -1,0 +1,47 @@
+{
+	"_help": "Copy this file to sites/<your-site>/gdn_rag/providers.json and edit it. Never put real keys in this example file. Use 'site_config:<key>' and put the key in site_config.json.",
+	"chat": [
+		{
+			"name": "local",
+			"enabled": true,
+			"priority": 10,
+			"adapter": "openai_compatible",
+			"base_url": "http://LOCAL_LLM_HOST:11434/v1",
+			"model": "llama3.1:8b",
+			"api_key": null,
+			"timeout": { "connect": 3, "read": 120 },
+			"max_tokens": 800,
+			"temperature": 0.2
+		},
+		{
+			"name": "gemini",
+			"enabled": true,
+			"priority": 20,
+			"adapter": "openai_compatible",
+			"base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
+			"model": "gemini-2.5-flash",
+			"api_key": "site_config:gdn_rag_gemini_key",
+			"timeout": { "connect": 5, "read": 60 },
+			"max_tokens": 800,
+			"temperature": 0.2
+		},
+		{
+			"name": "openai",
+			"enabled": false,
+			"priority": 30,
+			"adapter": "openai_compatible",
+			"base_url": "https://api.openai.com/v1",
+			"model": "gpt-4.1-mini",
+			"api_key": "site_config:gdn_rag_openai_key"
+		},
+		{
+			"name": "claude",
+			"enabled": false,
+			"priority": 40,
+			"adapter": "anthropic",
+			"base_url": "https://api.anthropic.com",
+			"model": "claude-haiku-5-5",
+			"api_key": "site_config:gdn_rag_anthropic_key"
+		}
+	]
+}

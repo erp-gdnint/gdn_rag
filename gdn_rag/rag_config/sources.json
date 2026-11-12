@@ -1,0 +1,5 @@
+{
+	"sources": [
+		{ "key": "lms", "enabled": true, "index_mode": "both" }
+	]
+}
