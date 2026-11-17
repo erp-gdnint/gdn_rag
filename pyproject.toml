@@ -1,14 +1,14 @@
 [project]
 name = "gdn_rag"
 authors = [
-    { name = "GDN", email = "erp@gdn.int"}
+    { name = "GDN ERP", email = "erp@gdn.int"}
 ]
 description = "RAG for gdn apps"
-requires-python = ">=3.10"
+requires-python = ">=3.14"
 readme = "README.md"
 dynamic = ["version"]
 dependencies = [
-    # "frappe~=15.0.0" # Installed and managed by bench.
+    # "frappe~=16.0.0" # Installed and managed by bench.
 ]
 
 [build-system]
@@ -21,7 +21,7 @@ build-backend = "flit_core.buildapi"
 
 [tool.ruff]
 line-length = 110
-target-version = "py310"
+target-version = "py314"
 
 [tool.ruff.lint]
 select = [

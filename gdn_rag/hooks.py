@@ -4,6 +4,7 @@ app_publisher = "GDN"
 app_description = "RAG for gdn apps"
 app_email = "erp@gdn.int"
 app_license = "mit"
+required_apps = ["lms"]  # indexes LMS courses and lessons and follows the LMS access rules
 
 # Chat widget on Desk pages. Desk loads a tiny loader, which loads the widget with a version in its URL
 # (static files are cached for 12 hours). On /lms pages the widget is added by web/inject.py instead,

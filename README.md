@@ -10,10 +10,11 @@ v1 indexes the courses and lessons of the **Frappe LMS** app. It does not change
 - Needs no DocTypes: settings are JSON files. Works on MariaDB 10.11 (keyword search, no vector database).
 - Plug-in sources: other apps (CRM ...) can add content later without changing the core.
 
-### Install
+### Install (Frappe / ERPNext v16, branch `version-16-develop`)
 
 ```bash
 cd $PATH_TO_YOUR_BENCH
+bench get-app gdn_rag https://github.com/erp-gdnint/gdn_rag --branch version-16-develop   # needs the lms app
 bench --site <site> install-app gdn_rag
 bench --site <site> migrate
 bench --site <site> gdn-rag status
