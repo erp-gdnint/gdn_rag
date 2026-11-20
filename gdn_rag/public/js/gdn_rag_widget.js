@@ -250,9 +250,9 @@
 	var SHELL =
 		'<div class="root">' +
 		'<button class="launcher" type="button">' + ICON.chat + "</button>" +
-		'<div class="panel" role="dialog" aria-label="Course assistant" hidden>' +
+		'<div class="panel" role="dialog" aria-label="GDAC Coach" hidden>' +
 		["n", "s", "e", "w", "ne", "nw", "se", "sw"].map(function (d) { return '<div class="rs ' + d + '" data-dir="' + d + '"></div>'; }).join("") +
-		'<div class="hdr"><div class="title">Course assistant</div>' +
+		'<div class="hdr"><div class="title">GDAC Coach</div>' +
 		'<button class="icon" type="button" data-act="new" title="New chat" aria-label="New chat">' + ICON.neu + "</button>" +
 		'<button class="icon" type="button" data-act="dock" title="Dock to the right side" aria-label="Dock to the right side">' + ICON.dock + "</button>" +
 		'<button class="icon" type="button" data-act="close" title="Close (Esc)" aria-label="Close">' + ICON.close + "</button></div>" +
@@ -312,7 +312,15 @@
 		var ctxTimer = null;
 
 		var saved = readJson("session", CHAT_KEY, {});
-		var messages = Array.isArray(saved.messages) ? saved.messages : [];
+		var GREETING =
+			"Hi! I'm the **GDAC Coach**. I'm here to help and guide you through your GDAC grant and the courses on this platform.\n\n" +
+			"You can ask me about any course or lesson, get help with progress reports and MEL concepts (outputs, outcomes, indicators), " +
+			"or just share your notes and I'll help you turn them into a clear draft for your mentor or GDN.\n\n" +
+			"To give you the right guidance, which track is your grant in (**ORD**, **MIDP** or **JSDF**), and which prize did you receive?";
+		function welcome() {
+			return { role: "assistant", content: GREETING, status: "done", citations: [] };
+		}
+		var messages = Array.isArray(saved.messages) && saved.messages.length ? saved.messages : [welcome()];
 		var scope = saved.scope || { mode: "all" }; // page | all | course
 		var geom = readJson("local", GEOM_KEY, null) || { mode: "float", x: null, y: null, w: 420, h: 620, dockW: 420 };
 
@@ -602,8 +610,9 @@
 			b.textContent = "Hello! I'm the GDAC Coach";
 			d.appendChild(b);
 			d.appendChild(document.createTextNode(
-				"I'm here to help you navigate your grant requirements, clarify your MEL framework, and turn your notes into clear drafts for your mentor and GDN. " +
-				"To give you the right guidance, tell me: which track is your grant in (ORD, MIDP or JSDF), and which prize did you receive (first, second or third)?"
+				"I'm here to help you navigate the programme requirements and work through your drafts, reports, and MEL concepts. " +
+				"To get started, could you tell me: which track is your grant in (ORD, MIDP, or JSDF), and which prize did you receive? " +
+				"(Second and third prizes go through a rescaling process, which affects the first steps of the grant.)"
 			));
 			msgsEl.appendChild(d);
 		}
@@ -755,7 +764,7 @@
 
 		function newChat() {
 			if (busy) stop();
-			messages = [];
+			messages = [welcome()];
 			persist();
 			renderAll();
 			input.focus();
