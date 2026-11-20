@@ -287,7 +287,10 @@ class LMSSource(BaseSource):
 		teaching = frappe.get_all(
 			"Course Instructor", filters={"instructor": user, "parenttype": COURSE}, pluck="parent"
 		)
-		return {"moderator": False, "public": sorted(set(public)), "full": sorted(set(enrolled) | set(teaching))}
+		full = set(enrolled) | set(teaching)
+		if self.conf.get("open_access"):
+			full |= set(public)  # every published course, all lessons, enrolled or not
+		return {"moderator": False, "public": sorted(set(public)), "full": sorted(full)}
 
 	def access_rule(self, user):
 		key = f"gdn_rag:access:lms:{user}"

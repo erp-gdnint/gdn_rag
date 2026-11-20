@@ -74,7 +74,7 @@ def retrieve(
 
 	sources = registry.get_sources()
 	if scope:
-		sources = {k: s for k, s in sources.items() if k == scope.get("source")}
+		sources = {k: s for k, s in sources.items() if k in (scope.get("source"), "files")}
 	rules = [s.access_rule(user) for s in sources.values()]
 	access_sql, access_params = build_access_sql(rules)
 	if access_sql == "1 = 0":

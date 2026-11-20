@@ -39,4 +39,4 @@ scheduler_events = {
 }
 
 # Content sources. Other apps can add their own class paths to this hook.
-gdn_rag_sources = ["gdn_rag.sources.lms.LMSSource"]
+gdn_rag_sources = ["gdn_rag.sources.lms.LMSSource", "gdn_rag.sources.files.FilesSource"]

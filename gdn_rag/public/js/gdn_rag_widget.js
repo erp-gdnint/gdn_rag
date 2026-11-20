@@ -260,7 +260,7 @@
 		'<div class="pop" hidden></div></div>' +
 		'<div class="msgs" role="log" aria-label="Conversation"></div>' +
 		'<div class="sr" role="status" aria-live="polite"></div>' +
-		'<form class="composer"><textarea rows="1" placeholder="Ask about your courses..." aria-label="Your question"></textarea>' +
+		'<form class="composer"><textarea rows="1" placeholder="Ask the GDAC Coach..." aria-label="Your question"></textarea>' +
 		'<button class="send" type="submit">Send</button><button class="stop" type="button" hidden>Stop</button></form>' +
 		'<div class="foot"><span class="count"></span><span class="keys"></span></div>' +
 		"</div></div>";
@@ -313,7 +313,7 @@
 
 		var saved = readJson("session", CHAT_KEY, {});
 		var messages = Array.isArray(saved.messages) ? saved.messages : [];
-		var scope = saved.scope || { mode: "page" }; // page | all | course
+		var scope = saved.scope || { mode: "all" }; // page | all | course
 		var geom = readJson("local", GEOM_KEY, null) || { mode: "float", x: null, y: null, w: 420, h: 620, dockW: 420 };
 
 		// ---------- theme
@@ -599,9 +599,12 @@
 			var d = document.createElement("div");
 			d.className = "empty";
 			var b = document.createElement("b");
-			b.textContent = ctxInfo ? "Ask about " + ctxInfo.label.replace(/^Course: /, "") : "Ask about your courses";
+			b.textContent = "Hello! I'm the GDAC Coach";
 			d.appendChild(b);
-			d.appendChild(document.createTextNode("I answer only from the course material, and I show where the answer comes from."));
+			d.appendChild(document.createTextNode(
+				"I'm here to help you navigate your grant requirements, clarify your MEL framework, and turn your notes into clear drafts for your mentor and GDN. " +
+				"To give you the right guidance, tell me: which track is your grant in (ORD, MIDP or JSDF), and which prize did you receive (first, second or third)?"
+			));
 			msgsEl.appendChild(d);
 		}
 

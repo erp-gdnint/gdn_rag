@@ -284,7 +284,8 @@ def _scope_sql(scope: dict | None, params: dict) -> str:
 		return ""
 	params["sc_source"] = scope.get("source")
 	params["sc_name"] = scope.get("scope_name")
-	return " AND source = %(sc_source)s AND scope_name = %(sc_name)s"
+	# the GDAC documents (source "files") are always searched, whatever course is selected
+	return " AND (source = 'files' OR (source = %(sc_source)s AND scope_name = %(sc_name)s))"
 
 
 _HIT_COLUMNS = "id, source, ref_doctype, ref_name, scope_doctype, scope_name, title, route, content"

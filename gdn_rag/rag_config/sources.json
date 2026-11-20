@@ -1,5 +1,6 @@
 {
 	"sources": [
-		{ "key": "lms", "enabled": true, "index_mode": "both" }
+		{ "key": "lms", "enabled": true, "index_mode": "both", "open_access": false },
+		{ "key": "files", "enabled": true, "index_mode": "manual" }
 	]
 }

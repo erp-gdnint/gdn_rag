@@ -153,10 +153,7 @@ def pipeline(
 
 	hits, debug = retriever.retrieve(user, question, settings, used_scope, page, history)
 	yield {"type": "hits", "hits": hits, "debug": debug}
-	if not hits:
-		yield {"type": "delta", "provider": None, "text": settings.chat.not_found_message}
-		yield {"type": "done", "citations": [], "outcome": "not_found", "hits": 0}
-		return
+	# No early "not found" return: with no hits the coach still answers from its GDAC context.
 
 	messages = prompts.build_messages(
 		question, hits, history, settings.chat.not_found_message, page.label if page else None,
@@ -168,7 +165,7 @@ def pipeline(
 		text += piece
 		yield {"type": "delta", "provider": provider, "text": piece}
 	outcome = "not_found" if text.strip() == settings.chat.not_found_message else "answered"
-	citations = [] if outcome == "not_found" else parse_citations(text, hits)
+	citations = [] if outcome == "not_found" or not _CITE.search(text) else parse_citations(text, hits)
 	yield {"type": "done", "citations": citations, "outcome": outcome, "hits": len(hits), "provider": provider}
 
 
